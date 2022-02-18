@@ -1,0 +1,30 @@
+alias ..='cd ..';
+alias ...='cd ../..';
+alias ....='cd ../../..';
+
+alias .aliases='$EDITOR -n  ~/.aliases'
+alias .gitconfig='$EDITOR -n  ~/.gitconfig'
+
+alias cp='cp -v'
+alias mv='mv -v'
+alias rm='rm -i'
+
+alias /='code .'
+
+alias dcb="docker compose up --build --detach"
+alias dcd="docker compose down"
+alias dcr="dcd && dcu"
+alias dcu="docker compose up --detach"
+alias dl='curl -O'
+alias fs='du -sc * | sort -n | tail'
+alias g="git"
+alias hs="npx http-server "
+alias ll=ls -al
+alias lt="npx localtunnel --allow-invalid-cert --port"
+alias mkdir=mkdir -p
+alias npx="npx --yes"
+alias qlk='qlmanage -p "$@" >& /dev/null'
+alias sc="shortcuts create"
+alias tgz='tar -czf'
+alias untgz='tar -vzxf'
+alias zx="npx zx"

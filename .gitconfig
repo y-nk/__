@@ -1,0 +1,133 @@
+[core]
+  attributesfile = ~/.gitattributes
+  editor = /usr/bin/nano
+  excludesfile = ~/.gitignore
+  pager = cat
+  trustctime = false # http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/
+  untrackedCache = true # https://git-scm.com/docs/git-update-index#_untracked_cache
+  whitespace = space-before-tab,-trailing-space
+
+[user]
+  name = Julien Barbay
+  email = julien.barbay@gmail.com
+
+# ---------------------------------------
+
+[alias]
+  # basic ops
+  bra = co -b
+  clo = clone
+  cm  = commit
+  co  = checkout
+  rc  = rebase --continue
+  st  = status
+  sth = stash
+  sync = !git pull --quiet && git push
+  # pretty logs
+  eye = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
+  graph = log -M --decorate --graph
+  # workflow
+  cobra = !"!f(){ git fetch origin $(git main) --quiet; git checkout origin/$(git main) --quiet; git bra $@;}; f"
+  feat = !"!f(){ git cm -m feat: $@;}; f"
+  fix = !"!f(){ git cm -m fix: $@;}; f"
+  whoami = config user.email
+  # history related ops
+  cancel = reset HEAD~1 --hard
+  clear = reset --hard
+  fixup = cm --fixup
+  reword = commit --amend
+  undo = reset HEAD~1 --mixed
+  up = "!f(){ git pull --rebase --autostash origin $(git main) $@;}; f"
+  rw = !"git add . && git ci --amend --no-edit && git push -f"
+
+[color]
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+  ui = auto
+
+[delta]
+  navigate = true
+
+[difftool "vscode"]
+  cmd = code --wait --diff $LOCAL $REMOTE
+
+[interactive]
+  diffFilter = delta --color-only
+
+[mergetool]
+  keepBackup = false
+  keepTemporaries = false
+  writeToTemp = true
+  prompt = false
+
+[versionsort]
+  prereleaseSuffix = -pre
+  prereleaseSuffix = .pre
+  prereleaseSuffix = -beta
+  prereleaseSuffix = .beta
+  prereleaseSuffix = -rc
+  prereleaseSuffix = .rc
+
+# ---------------------------------------
+
+[init]
+  defaultBranch = main
+
+[branch]
+  autosetupmerge = always
+  autosetuprebase = always
+  sort = -committerdate
+
+[commit]
+  # gpgsign = true
+  template = ~/.gitcommit
+
+[diff]
+  colorMoved = default
+  mnemonicPrefix = true
+  renames = true
+  submodule = log
+  tool = vscode
+  wordRegex = .
+
+[help]
+	autocorrect = 1
+
+[log]
+  abbrevCommit = true
+  decorate = false
+  follow = true
+
+[fetch]
+  recurseSubmodules = on-demand
+  prune = true
+
+[grep]
+  break = true
+  extendedRegexp = true
+  heading = true
+  lineNumber = true
+
+[merge]
+  conflictstyle = diff3
+  ff = false
+
+[pull]
+  rebase = merges
+
+[push]
+  default = upstream
+  followTags = true
+
+[rebase]
+  autoSquash = true
+  autoStash = true
+
+[status]
+  submoduleSummary = true
+  showUntrackedFiles = all
+
+[tag]
+  sort = version:refname

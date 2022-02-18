@@ -1,0 +1,117 @@
+source ./.colors
+
+function log_cmd() {
+  _info "$1..." "  "
+  eval $4 >> /dev/null 2>&1
+  val=$?
+  _cr
+  if [[ "$val" == "0" ]]; then
+    _success "$2!" "  "
+  else
+    _fail "$3" "  "
+  fi
+  _nl
+}
+
+function section() {
+  _title $1 && _nl
+}
+
+function apply_stuff() {
+  log_cmd "applying $1" "$1 applied" "$1 failed" "$2"
+}
+
+function install_stuff() {
+  log_cmd "installing $1" "$1 installed" "install failed" "$2"
+}
+
+function update_stuff() {
+  log_cmd "updating $1" "$1 updated" "update failed" "$2"
+}
+
+function apply_symlinks() {
+  section "symlinks"
+
+  files=(.aliases .apply .bash_profile .bashrc .colors .editorconfig .gitcommit .gitconfig .gitignore .mackup.cfg .macos .shellrc .shortcuts.plist .zshrc)
+
+  for file in "${files[@]}"; do
+    apply_stuff $file 'ln -fs "$(pwd)/${file}" "${HOME}/${file}"'
+  done
+}
+
+function apply_xcode() {
+  section "xcode"
+  install_stuff "xcode" "sudo xcode-select --install"
+}
+
+function apply_omz() {
+  section "omz"
+
+  if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    install_stuff "omz" '/bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
+  else
+    update_stuff "omz" "omz update"
+  fi
+}
+
+function apply_brew() {
+  section "brew"
+
+  if ! type "brew" > /dev/null; then
+    install_stuff "brew" '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+  else
+    update_stuff "brew" "brew update"
+  fi
+}
+
+function apply_cli_apps() {
+  section "cli apps"
+  packages=(asciinema awscli bash chafa coreutils curl fd fortune fzf gh git glow httpie jq mackup mas ncdu nmap pulumi volta youtube-dl rodionovd/taps/shortcuts superfly/tap/flyctl)
+
+  for package in "${packages[@]}"; do
+    install_stuff "$package" "brew install $package"
+  done
+}
+
+function apply_cask_apps() {
+  section "cask apps"
+  casks=(android-platform-tools charles cloudapp cumulus day-o docker dropbox figma font-anonymous-pro fork gpg-suite-no-mail gitify google-chrome iterm2 pock rectangle slack visual-studio-code vlc vyprvpn)
+
+  for cask in "${casks[@]}"; do
+    install_stuff "$cask" "brew install --cask $cask"
+  done
+}
+
+function apply_macstore_apps() {
+  section "macstore apps"
+  apps=( line-539883307 screenbrush-1233965871 tasktab-1395414535 )
+
+  for app in "${apps[@]}"; do
+    install_stuff "${app%%-*}" "mas install ${app#*-}"
+  done
+}
+
+function apply_postinstall() {
+  section "postinstall"
+
+  apply_stuff "fzf" "$(brew --prefix)/opt/fzf/install --all"
+  apply_stuff "mackup" "mackup restore"
+  apply_stuff "shortcuts" "shortcuts import ~/.shortcuts.plist"
+  apply_stuff "volta" "volta install node"
+}
+
+function apply_macos() {
+  section "macOS"
+
+  apply_stuff "macOS settings" "source ./.macos"
+}
+
+# main
+apply_symlinks
+apply_omz
+apply_brew
+apply_cli_apps
+apply_cask_apps
+apply_macstore_apps
+apply_postinstall
+#apply_macos
