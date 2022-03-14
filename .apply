@@ -75,7 +75,7 @@ function apply_cli_apps() {
 
 function apply_cask_apps() {
   section "cask apps"
-  casks=(android-platform-tools charles cloudapp cumulus day-o docker dropbox figma font-anonymous-pro fork gpg-suite-no-mail gitify google-chrome iterm2 pock rectangle slack visual-studio-code vlc vyprvpn)
+  casks=(android-platform-tools charles cloudapp cumulus day-o docker dropbox figma homebrew/cask-fonts/font-anonymous-pro fork gpg-suite-no-mail gitify google-chrome iterm2 pock rectangle slack visual-studio-code vlc vyprvpn)
 
   for cask in "${casks[@]}"; do
     install_stuff "$cask" "brew install --cask $cask"
