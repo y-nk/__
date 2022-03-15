@@ -38,3 +38,7 @@ git clone https://github.com/y-nk/__.git $ROOT >> /dev/null 2>&1
 cd $ROOT && . ./.apply
 echo "export __=\"$ROOT\"" >> "$HOME/.shellrc"
 source $HOME/.zshrc
+
+# allow for future push
+git remote remove origin
+git remote add origin git@github.com:y-nk/__.git
