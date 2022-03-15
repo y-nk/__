@@ -32,7 +32,7 @@ function update_stuff() {
 function apply_symlinks() {
   section "symlinks"
 
-  files=(.aliases .apply .bash_profile .bashrc .colors .editorconfig .gitcommit .gitconfig .gitignore .mackup.cfg .macos .shellrc .shortcuts.plist .zshrc)
+  files=(.aliases .apply .bash_profile .bashrc .colors .editorconfig .gitcommit .gitconfig .y_nk.gitconfig .pro.gitconfig .gitignore .mackup.cfg .macos .shellrc .shortcuts.plist .zshrc)
 
   for file in "${files[@]}"; do
     apply_stuff $file 'ln -fs "$(pwd)/${file}" "${HOME}/${file}"'

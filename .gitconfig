@@ -7,9 +7,11 @@
   untrackedCache = true # https://git-scm.com/docs/git-update-index#_untracked_cache
   whitespace = space-before-tab,-trailing-space
 
-[user]
-  name = Julien Barbay
-  email = julien.barbay@gmail.com
+[include]
+  path = ~/.y_nk.gitconfig
+
+[includeIf "gitdir:~/Work/"]
+  path = ~/.pro.gitconfig
 
 # ---------------------------------------
 
