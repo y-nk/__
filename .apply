@@ -84,7 +84,7 @@ function apply_cask_apps() {
 
 function apply_macstore_apps() {
   section "macstore apps"
-  apps=( flowapp-1423210932 line-539883307 screenbrush-1233965871 tasktab-1395414535 )
+  apps=( flowapp-1423210932 line-539883307 mindmap-1522142579 screenbrush-1233965871 tasktab-1395414535 )
 
   for app in "${apps[@]}"; do
     install_stuff "${app%%-*}" "mas install ${app#*-}"
