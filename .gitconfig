@@ -2,7 +2,6 @@
   attributesfile = ~/.gitattributes
   editor = /usr/bin/nano
   excludesfile = ~/.gitignore
-  pager = cat
   trustctime = false # http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/
   untrackedCache = true # https://git-scm.com/docs/git-update-index#_untracked_cache
   whitespace = space-before-tab,-trailing-space
@@ -22,16 +21,21 @@
   cm  = commit
   co  = checkout
   rc  = rebase --continue
+  pushd = push -u origin HEAD
   st  = status
   sth = stash
   sync = !git pull --quiet && git push
   # pretty logs
-  eye = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
-  graph = log -M --decorate --graph
+  eye = !git log --pretty=format:\"%C(cyan)%h%Creset -%C(red)%d%Creset %s - %C(yellow)[%an]%C(dim yellow) (%cr)\" --abbrev-commit -30
+  graph = log --pretty='tformat: %s' --graph --all --find-renames
+  yesterday = log --since=yesterday.midnight
   # workflow
-  cobra = !"!f(){ git fetch origin $(git main) --quiet; git checkout origin/$(git main) --quiet; git bra $@;}; f"
-  feat = !"!f(){ git cm -m feat: $@;}; f"
-  fix = !"!f(){ git cm -m fix: $@;}; f"
+  cobra = !"f() { git fetch origin $(git main) --quiet; git checkout origin/$(git main) --quiet; git bra \"$@\";}; f"
+  empty = !"git cm --allow-empty -m \"empty\" && git push"
+  feat = !"f() { git cm -m \"feat: $@\";}; f"
+  fix = !"f() { git cm -m \"fix: $@\";}; f"
+  it = !"f() { git add . && git cm -m \"$@\" && git push; }; f"
+  main = !"f() { git remote show origin | grep HEAD | awk '{print $NF}'; }; f"
   whoami = config user.email
   # history related ops
   cancel = reset HEAD~1 --hard
@@ -39,8 +43,8 @@
   fixup = cm --fixup
   reword = commit --amend
   undo = reset HEAD~1 --mixed
-  up = "!f(){ git pull --rebase --autostash origin $(git main) $@;}; f"
-  rw = !"git add . && git ci --amend --no-edit && git push -f"
+  up = !"f() { git pull --rebase --autostash origin $(git main) \"$@\";}; f"
+  rw = !"git add . && git cm --amend --no-edit && git push -f"
 
 [color]
   branch = auto
@@ -99,8 +103,6 @@
 
 [log]
   abbrevCommit = true
-  decorate = false
-  follow = true
 
 [fetch]
   recurseSubmodules = on-demand
@@ -120,6 +122,7 @@
   rebase = merges
 
 [push]
+  autoSetupRemote = true
   default = upstream
   followTags = true
 

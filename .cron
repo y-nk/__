@@ -1,0 +1,4 @@
+CRONDARGS=" -s -m off"
+PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin"
+
+@reboot brew upgrade && brew update && brew cleanup --force

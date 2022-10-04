@@ -91,3 +91,4 @@ source $ZSH/oh-my-zsh.sh
 source ~/.shellrc
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(fnm env --use-on-cd)"

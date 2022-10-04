@@ -32,7 +32,7 @@ function update_stuff() {
 function apply_symlinks() {
   section "symlinks"
 
-  files=(.aliases .apply .bash_profile .bashrc .colors .editorconfig .gitcommit .gitconfig .y_nk.gitconfig .pro.gitconfig .gitignore .mackup.cfg .macos .shellrc .shortcuts.plist .zshrc)
+  files=(.aliases .apply .bash_profile .bashrc .colors .editorconfig .fdignore .gitcommit .gitconfig .y_nk.gitconfig .pro.gitconfig .gitignore .mackup.cfg .macos .shellrc .shortcuts.plist .zshrc)
 
   for file in "${files[@]}"; do
     apply_stuff $file 'ln -fs "$(pwd)/${file}" "${HOME}/${file}"'
@@ -66,7 +66,8 @@ function apply_brew() {
 
 function apply_cli_apps() {
   section "cli apps"
-  packages=(asciinema awscli bash chafa coreutils curl fd fortune fzf gh git glow httpie jq mackup mas ncdu nmap pulumi volta youtube-dl rodionovd/taps/shortcuts superfly/tap/flyctl)
+
+  packages=(asciinema awscli bash bat chafa coreutils curl fd fortune fnm fzf gh git glow httpie jq kubectl m-cli mackup macos-trash mas ncdu nmap sdm youtube-dl rodionovd/taps/shortcuts superfly/tap/flyctl)
 
   for package in "${packages[@]}"; do
     install_stuff "$package" "brew install $package"
@@ -75,7 +76,8 @@ function apply_cli_apps() {
 
 function apply_cask_apps() {
   section "cask apps"
-  casks=(android-platform-tools charles cloudapp cumulus day-o docker dropbox figma homebrew/cask-fonts/font-anonymous-pro fork gpg-suite-no-mail gitify google-chrome iterm2 pock rectangle slack visual-studio-code vlc vyprvpn)
+
+  casks=(android-platform-tools charles cron docker figma homebrew/cask-fonts/font-anonymous-pro homebrew/cask-fonts/font-martian-mono fork gpg-suite-no-mail gitify google-chrome iterm2 jumpshare lens linear-linear maestral pock rectangle slack visual-studio-code vlc vyprvpn)
 
   for cask in "${casks[@]}"; do
     install_stuff "$cask" "brew install --cask $cask"
@@ -84,7 +86,8 @@ function apply_cask_apps() {
 
 function apply_macstore_apps() {
   section "macstore apps"
-  apps=( flowapp-1423210932 line-539883307 mindmap-1522142579 screenbrush-1233965871 tasktab-1395414535 )
+
+  apps=( line-539883307 screenbrush-1233965871 tasktab-1395414535 )
 
   for app in "${apps[@]}"; do
     install_stuff "${app%%-*}" "mas install ${app#*-}"
