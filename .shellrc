@@ -10,6 +10,7 @@ export FZF_CTRL_T_OPTS='--preview "bat --color=always --style=numbers,changes --
 export GPG_TTY=$(tty)
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_INSTALL_CLEANUP=1
 export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"\
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8

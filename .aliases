@@ -11,6 +11,8 @@ alias rm='rm -i'
 
 alias /='code .'
 
+alias db="docker build ."
+alias dr="docker run -it $1 /bin/sh"
 alias dcb="docker compose up --build --detach"
 alias dcd="docker compose down"
 alias dcr="dcd && dcu"
@@ -18,6 +20,9 @@ alias dcu="docker compose up --detach"
 alias dl='curl -O'
 alias fs='du -sc * | sort -n | tail'
 alias g="git"
+alias ga='f() { git add $@; }; f'
+alias gs="git st"
+alias gc='f() { git commit -m "$1" }; f'
 alias hs="npx http-server "
 alias ll=ls -al
 alias lt="npx localtunnel --allow-invalid-cert --port"
