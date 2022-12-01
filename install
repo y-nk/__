@@ -31,12 +31,14 @@ EOF
 echo -ne "\e[0m"
 
 # bootstrap
-ROOT="$HOME/Library/Mobile Documents/com~apple~CloudDocs/.__/dotfiles"
-rm -fr $ROOT >> /dev/null # 2>&1
-mkdir -p $ROOT >> /dev/null # 2>&1
-git clone https://github.com/y-nk/__.git $ROOT >> /dev/null 2>&1
-cd $ROOT && . ./.apply
-echo "export __=\"$ROOT\"" >> "$HOME/.shellrc"
+__="$HOME/Library/Mobile Documents/com~apple~CloudDocs/.__/dotfiles"
+export __=$__
+
+rm -fr $__ >> /dev/null # 2>&1
+mkdir -p $__ >> /dev/null # 2>&1
+git clone https://github.com/y-nk/__.git $__ >> /dev/null 2>&1
+cd $__ && source ./.apply && apply_all
+echo "export __=\"$__\"" >> "$HOME/.shellrc"
 source $HOME/.zshrc
 
 # allow for future push

@@ -28,6 +28,7 @@ alias ll=ls -al
 alias lt="npx localtunnel --allow-invalid-cert --port"
 alias mkdir=mkdir -p
 alias mute='m volume 0 >& /dev/null'
+alias note='set_title'
 alias npx="npx --silent --yes"
 alias qlk='qlmanage -p "$@" >& /dev/null'
 alias sc="shortcuts create"
@@ -36,3 +37,24 @@ alias tldr='npx tldr'
 alias untgz='tar -vzxf'
 alias zx="npx zx"
 alias vercel="npx vercel"
+
+function set_title() {
+  echo -en "\e]0;$@\a"
+}
+
+function foreground_process() {
+  fuser $1 2> /dev/null | awk '{print $2}'
+}
+
+function elapsed_time() {
+  ps -eo pid,etime | grep $1 | awk '{print $2}'
+}
+
+function tty_hanging() {
+  id=${1:-$(tty)}
+  pid=$(foreground_process $id)
+
+  if [ -n $pid ]; then
+    elapsed_time $pid
+  fi
+}

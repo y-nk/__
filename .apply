@@ -35,7 +35,7 @@ function apply_symlinks() {
   files=(.aliases .apply .bash_profile .bashrc .colors .editorconfig .fdignore .gitcommit .gitconfig .y_nk.gitconfig .pro.gitconfig .gitignore .mackup.cfg .macos .shellrc .shortcuts.plist .zshrc)
 
   for file in "${files[@]}"; do
-    apply_stuff $file 'ln -fs "$(pwd)/${file}" "${HOME}/${file}"'
+    apply_stuff $file 'ln -fs "${__}/${file}" "${HOME}/${file}"'
   done
 }
 
@@ -101,6 +101,23 @@ function apply_macstore_apps() {
   done
 }
 
+function apply_iterm_components() {
+  section "iterm"
+
+  install_path="${HOME}/Library/Application Support/iTerm2"
+  scripts_path="${install_path}/Scripts/AutoLaunch"
+
+  rm -fr $scripts_path >> /dev/null
+  mkdir -p $scripts_path >> /dev/null
+
+  scripts=$(cd ${__}/.iterm && ls *.py)
+
+  for script in "${scripts[@]}"; do
+    echo ln -fs "${__}/.iterm/${script}" "${scripts_path}/${script}"
+    apply_stuff "script: $script" 'ln -fs "${__}/.iterm/${script}" "${scripts_path}/${script}"'
+  done
+}
+
 function apply_postinstall() {
   section "postinstall"
 
@@ -116,12 +133,13 @@ function apply_macos() {
   apply_stuff "macOS settings" "source ./.macos"
 }
 
-# main
-apply_symlinks
-apply_omz
-apply_brew
-apply_cli_apps
-apply_cask_apps
-apply_macstore_apps
-apply_postinstall
-#apply_macos
+function apply_all() {
+  apply_symlinks
+  apply_omz
+  apply_brew
+  apply_cli_apps
+  apply_cask_apps
+  apply_macstore_apps
+  apply_postinstall
+  #apply_macos
+}
