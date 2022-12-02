@@ -18,31 +18,32 @@ async def main(connection):
 
   @iterm2.StatusBarRPC
   async def tick(knobs):
-    # access session
-    window = app.current_terminal_window
-    tab = window.current_tab
-    session = app.get_session_by_id(tab.active_session_id)
-
-    # get active tty
-    tty = await session.async_get_variable('tty')
-
     try:
+      # access session
+      window = app.current_terminal_window
+      tab = window.current_tab
+      session = app.get_session_by_id(tab.active_session_id)
+
+      # get active tty
+      tty = await session.async_get_variable('tty')
+
       # get frontend pid
-      [_, pid] = subprocess.getstatusoutput(f"fuser {tty} 2> /dev/null | awk '{{print $2}}'")
+      fuser = subprocess.run(f"fuser {tty} 2> /dev/null | awk '{{print $2}}'", capture_output=True, shell=True, timeout=1)
+      pid = fuser.stdout.decode().replace("\n", "")
 
       # pid not found
       if len(pid) == 0:
         return ''
 
       # uptime of the pid
-      [_, upt] = subprocess.getstatusoutput(f"ps -eo pid,etime | grep {pid} | awk '{{print $2}}'")
+      pseo = subprocess.run(f"ps -eo pid,etime | grep {pid} | awk '{{print $2}}'", capture_output=True, shell=True,timeout=1)
+      upt = pseo.stdout.decode().replace("\n", "")
 
       return upt
 
-    except subprocess.TimeoutExpired as e:
+    except BaseException as ex:
+      print(ex)
       return ''
-
-    return ''
 
   await component.async_register(connection, tick)
 
