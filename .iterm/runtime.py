@@ -1,7 +1,7 @@
 from datetime import datetime
 from os.path import exists
 
-import subprocess
+from subprocess import getoutput
 import iterm2
 
 async def main(connection):
@@ -28,23 +28,20 @@ async def main(connection):
       tty = await session.async_get_variable('tty')
 
       # get frontend pid
-      fuser = subprocess.run(f"fuser {tty} 2> /dev/null | awk '{{print $2}}'", capture_output=True, shell=True, timeout=1)
-      pid = fuser.stdout.decode().replace("\n", "")
+      pid = getoutput(f"fuser {tty} 2> /dev/null | awk '{{print $2}}'")
 
       # pid not found
       if len(pid) == 0:
-        return ''
+        return '(idle)'
 
       # uptime of the pid
-      pseo = subprocess.run(f"ps -eo pid,etime | grep {pid} | awk '{{print $2}}'", capture_output=True, shell=True,timeout=1)
-      upt = pseo.stdout.decode().replace("\n", "")
-
+      upt = getoutput(f"ps -eo pid,etime | grep {pid} | awk '{{print $2}}'")
       return upt
 
     except BaseException as ex:
       print(ex)
       return ''
 
-  await component.async_register(connection, tick)
+  await component.async_register(connection, tick, timeout=2)
 
 iterm2.run_forever(main)
