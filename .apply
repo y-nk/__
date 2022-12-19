@@ -69,7 +69,7 @@ function apply_cli_apps() {
 
   packages=(asciinema awscli bash bat chafa coreutils curl fd fortune fnm fzf gh git glow
 httpie jq keepassc kubectl m-cli mackup macos-trash mas ncdu nmap
-sdm watch ykman youtube-dl
+sdm watch youtube-dl
 rodionovd/taps/shortcuts superfly/tap/flyctl)
 
   for package in "${packages[@]}"; do
@@ -80,11 +80,11 @@ rodionovd/taps/shortcuts superfly/tap/flyctl)
 function apply_cask_apps() {
   section "cask apps"
 
-  casks=(android-platform-tools charles cron docker figma
+  casks=(1password 1password-cli android-platform-tools charles cron docker figma
 homebrew/cask-fonts/font-anonymous-pro
 homebrew/cask-fonts/font-martian-mono fork gpg-suite-no-mail gitify
-google-chrome iterm2 jumpshare keeweb lens linear-linear maestral
-pock rectangle slack visual-studio-code vlc vyprvpn)
+google-chrome iterm2 jumpshare keeweb lens maestral notion
+pock rectangle slack skype todoist visual-studio-code vlc vyprvpn zoom)
 
   for cask in "${casks[@]}"; do
     install_stuff "$cask" "brew install --cask $cask"

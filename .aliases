@@ -12,7 +12,6 @@ alias rm='rm -i'
 alias /='code .'
 
 alias db="docker build ."
-alias dr="docker run -it $1 /bin/sh"
 alias dcb="docker compose up --build --detach"
 alias dcd="docker compose down"
 alias dcr="dcd && dcu"
@@ -37,6 +36,10 @@ alias tldr='npx tldr'
 alias untgz='tar -vzxf'
 alias zx="npx zx"
 alias vercel="npx vercel"
+
+function dr() {
+  docker run -it $1 /bin/sh
+}
 
 function set_title() {
   echo -en "\e]0;$@\a"
