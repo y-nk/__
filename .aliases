@@ -29,6 +29,8 @@ alias mkdir=mkdir -p
 alias mute='m volume 0 >& /dev/null'
 alias note='set_title'
 alias npx="npx --silent --yes"
+alias opon="op signin"
+alias opoff="op signout"
 alias qlk='qlmanage -p "$@" >& /dev/null'
 alias sc="shortcuts create"
 alias tgz='tar -czf'
@@ -63,10 +65,27 @@ function tty_hanging() {
 }
 
 function load_secrets() {
+  op whoami >> /dev/null 2>&1
+
+  [ "$?" -eq 1 ] && opon
+
+  secrets=""
+
   vars=( NODE_AUTH_TOKEN=op://private/GH_PAT/password )
 
   for var in "${vars[@]}"; do
-    export ${var%%=*}=$(op read ${var#*=})
+    secrets=${secrets}"export ${var%%=*}=$(op read ${var#*=});"
   done
-  _success 'secrets loaded!'
+
+  # load secrets
+  eval $secrets
+
+  if [[ "$1" == "--save" ]]; then
+    secrets=${secrets}"_success 'secrets loaded!' && _nl && _nl"
+    echo ${secrets} | sed -e s/\;/\\n/ > ~/.secrets
+  fi
+}
+
+function clear_secrets() {
+  echo -ne "_info 'no secrets loaded ' && _nl && _nl" > ~/.secrets
 }
