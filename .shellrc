@@ -20,5 +20,4 @@ export MANPATH="/usr/local/man:$MANPATH"
 export NODE_OPTIONS='--max-old-space-size=8192'
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 export OP_BIOMETRIC_UNLOCK_ENABLED='true'
-# ---
 export __="$ICLOUD/.__/dotfiles"

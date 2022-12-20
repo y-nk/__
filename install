@@ -34,14 +34,23 @@ echo -ne "\e[0m"
 __="$HOME/Library/Mobile Documents/com~apple~CloudDocs/.__/dotfiles"
 export __=$__
 
+# testing git install
+which git >> /dev/null 2>&1
+if [ "$?" -eq 1 ];then
+  # no git, must install terminal tools
+  sudo xcode-select --install
+fi
+
 if [ ! -d $__/.git ]; then
   rm -fr $__ >> /dev/null # 2>&1
   mkdir -p $__ >> /dev/null # 2>&1
   git clone https://github.com/y-nk/__.git $__ >> /dev/null 2>&1
 fi
 
-cd $__ && source ./.apply && apply_all
-echo "export __=\"$__\"" >> "$HOME/.shellrc"
+cd $__
+git pull >> /dev/null # 2>&1
+source ./.apply
+apply_all
 source $HOME/.zshrc
 
 # allow for future push
