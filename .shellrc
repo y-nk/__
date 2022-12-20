@@ -1,23 +1,24 @@
 source ./.colors
 source ./.aliases
 
-export BASH_SILENCE_DEPRECATION_WARNING=1
-export CRONDARGS=" -s -m off"
-export EDITOR="nano"
+export BASH_SILENCE_DEPRECATION_WARNING='1'
+export CRONDARGS=' -s -m off'
+export EDITOR='nano'
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude ".git*" --strip-cwd-prefix'
 export FZF_DEFAULT_OPTS='--layout reverse --border'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS='--preview "bat --color=always --style=numbers,changes --theme=1337 {}"'
 export GPG_TTY=$(tty)
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+export HOMEBREW_CASK_OPTS='--appdir=/Applications'
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_INSTALL_CLEANUP=1
 export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"\
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
+export LC_CTYPE='en_US.UTF-8'
 export MANPATH="/usr/local/man:$MANPATH"
-export NODE_OPTIONS="--max-old-space-size=8192"
+export NODE_OPTIONS='--max-old-space-size=8192'
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+export OP_BIOMETRIC_UNLOCK_ENABLED='true'
 # ---
-export __="/Users/julien/Library/Mobile Documents/com~apple~CloudDocs/.__/dotfiles"
+export __="$ICLOUD/.__/dotfiles"
