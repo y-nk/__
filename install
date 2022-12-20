@@ -34,9 +34,12 @@ echo -ne "\e[0m"
 __="$HOME/Library/Mobile Documents/com~apple~CloudDocs/.__/dotfiles"
 export __=$__
 
-rm -fr $__ >> /dev/null # 2>&1
-mkdir -p $__ >> /dev/null # 2>&1
-git clone https://github.com/y-nk/__.git $__ >> /dev/null 2>&1
+if [ ! -d $__/.git ]; then
+  rm -fr $__ >> /dev/null # 2>&1
+  mkdir -p $__ >> /dev/null # 2>&1
+  git clone https://github.com/y-nk/__.git $__ >> /dev/null 2>&1
+fi
+
 cd $__ && source ./.apply && apply_all
 echo "export __=\"$__\"" >> "$HOME/.shellrc"
 source $HOME/.zshrc
