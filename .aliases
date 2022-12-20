@@ -61,3 +61,51 @@ function tty_hanging() {
     elapsed_time $pid
   fi
 }
+
+function opif() {
+  session=$(env | grep OP_SESSION)
+  [[ ! -z "$session" ]] && return 0 || return 1
+}
+
+function opon() {
+  op whoami >> /dev/null 2>&1
+
+  if [ "$?" -eq 1 ]; then
+    echo -ne "" > ~/.secrets
+    eval $(op signin)
+
+    if [ "$?" -eq 1 ]; then
+      exit 1
+    fi
+  fi
+
+  if [[ "$1" == "--persist" ]]; then
+    echo "export $(env | grep OP_SESSION)" > ~/.secrets
+  fi
+}
+
+function opoff() {
+  echo -ne "" > ~/.secrets
+  op signout
+
+  if [[ "$1" == "--fully" ]]; then
+    session=$(env | grep OP_SESSION | cut -f 1 -d '=')
+    [[ ! -z "$session" ]] && unset $session
+  fi
+}
+
+function load_secrets() {
+  opif
+
+  if [ "$?" -eq 0 ]; then
+    vars=( NODE_AUTH_TOKEN=op://private/GH_PAT/password )
+
+    for var in "${vars[@]}"; do
+      export ${var%%=*}=$(op read ${var#*=})
+    done
+    _success 'secrets loaded!'
+  else
+    opoff
+    _info 'op not logged in'
+  fi
+}

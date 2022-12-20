@@ -90,6 +90,10 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 source ~/.shellrc
+source ~/.secrets
+
+load_secrets && _nl && _nl
+fortune
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(fnm env --use-on-cd)"

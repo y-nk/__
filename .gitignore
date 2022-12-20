@@ -1,4 +1,5 @@
 # macOS
+.secrets
 .DS_Store
 .Spotlight-V100
 .Trashes

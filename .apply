@@ -29,13 +29,23 @@ function update_stuff() {
   log_cmd "updating $1" "$1 updated" "update failed" "$2"
 }
 
+function apply_files() {
+  section "files"
+
+  files=(.secrets)
+
+  for file in "${files[@]}"; do
+    apply_stuff $file 'touch "${HOME}/${file}"'
+  done
+}
+
 function apply_symlinks() {
   section "symlinks"
 
-  files=(.aliases .apply .bash_profile .bashrc .colors .editorconfig .fdignore .gitcommit .gitconfig .y_nk.gitconfig .pro.gitconfig .gitignore .mackup.cfg .macos .shellrc .shortcuts.plist .zshrc)
+  links=(.aliases .apply .bash_profile .bashrc .colors .editorconfig .fdignore .gitcommit .gitconfig .y_nk.gitconfig .pro.gitconfig .gitignore .mackup.cfg .macos .shellrc .shortcuts.plist .zshrc)
 
-  for file in "${files[@]}"; do
-    apply_stuff $file 'ln -fs "${__}/${file}" "${HOME}/${file}"'
+  for link in "${links[@]}"; do
+    apply_stuff $link 'ln -fs "${__}/${link}" "${HOME}/${link}"'
   done
 }
 
@@ -134,6 +144,7 @@ function apply_macos() {
 }
 
 function apply_all() {
+  apply_files
   apply_symlinks
   apply_omz
   apply_brew
