@@ -37,10 +37,12 @@
   it = !"f() { git add . && git cm -m \"$@\" && git push; }; f"
   main = !"f() { git remote show origin | grep HEAD | awk '{print $NF}'; }; f"
   whoami = config user.email
+  wip = !"f() { git add .; git cm -m \"wip: $(curl --silent http://metaphorpsum.com/sentences/1)\"; git push; }; f"
   # history related ops
+  pack = commit --amend --no-edit
   cancel = reset HEAD~1 --hard
   clear = reset --hard
-  fixup = cm --fixup
+  fixup = !"f() { git commit --fixup \"$@\" && git rebase --autosquash; }; f"
   reword = commit --amend
   undo = reset HEAD~1 --mixed
   up = !"f() { git pull --rebase --autostash origin $(git main) \"$@\";}; f"
