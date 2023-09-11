@@ -96,3 +96,8 @@ fortune
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(fnm env --use-on-cd)"
+
+# pnpm
+export PNPM_HOME="/Users/julien/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
