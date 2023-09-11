@@ -31,6 +31,7 @@ alias note='set_title'
 alias npx="npx --silent --yes"
 alias opon="op signin"
 alias opoff="op signout"
+alias phone="scrcpy &"
 alias qlk='qlmanage -p "$@" >& /dev/null'
 alias sc="shortcuts create"
 alias tgz='tar -czf'
@@ -38,6 +39,15 @@ alias tldr='npx tldr'
 alias untgz='tar -vzxf'
 alias zx="npx zx"
 alias vercel="npx vercel"
+
+function sober_up() {
+  brew cleanup -s
+  rm -fr "$(brew --cache)"
+
+  brew up
+  brew update
+  brew upgrade
+}
 
 function dr() {
   docker run -it $1 /bin/sh

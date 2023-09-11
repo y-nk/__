@@ -1,5 +1,10 @@
 source ./.colors
 
+if [[ -z "${__}" ]]; then
+  export __="$(pwd)"
+fi
+
+
 function log_cmd() {
   _info "$1..." "  "
   eval $4 >> /dev/null 2>&1
@@ -22,11 +27,11 @@ function apply_stuff() {
 }
 
 function install_stuff() {
-  log_cmd "installing $1" "$1 installed" "install failed" "$2"
+  log_cmd "installing $1" "$1 installed" "$1 install failed" "$2"
 }
 
 function update_stuff() {
-  log_cmd "updating $1" "$1 updated" "update failed" "$2"
+  log_cmd "updating $1" "$1 updated" "$1 update failed" "$2"
 }
 
 function apply_files() {
@@ -41,11 +46,21 @@ function apply_files() {
 
 function apply_symlinks() {
   section "symlinks"
-
+ 
   links=(.aliases .apply .bash_profile .bashrc .colors .editorconfig .fdignore .gitcommit .gitconfig .y_nk.gitconfig .pro.gitconfig .gitignore .mackup.cfg .macos .shellrc .shortcuts.plist .zshrc)
 
   for link in "${links[@]}"; do
     apply_stuff $link 'ln -fs "${__}/${link}" "${HOME}/${link}"'
+  done
+}
+
+function apply_secrets() {
+  section "secrets"
+
+  secrets=(gnupg ssh)
+
+  for secret in "${secrets[@]}"; do
+    apply_stuff $secret 'rm -fr "${HOME}/.${secret}" && ln -fs "${__}/../${secret}" "${HOME}/.${secret}"'
   done
 }
 
@@ -79,8 +94,7 @@ function apply_cli_apps() {
 
   packages=(asciinema awscli bash bat chafa coreutils curl fd fortune fnm fzf gh git glow
 httpie jq keepassc kubectl m-cli mackup macos-trash mas ncdu nmap
-sdm watch youtube-dl
-rodionovd/taps/shortcuts superfly/tap/flyctl)
+sdm watch youtube-dl oven-sh/bun/bun rodionovd/taps/shortcuts superfly/tap/flyctl)
 
   for package in "${packages[@]}"; do
     install_stuff "$package" "brew install $package"
@@ -146,6 +160,7 @@ function apply_macos() {
 function apply_all() {
   apply_files
   apply_symlinks
+  apply_secrets
   apply_omz
   apply_brew
   apply_cli_apps
