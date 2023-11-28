@@ -28,6 +28,7 @@
   # pretty logs
   eye = !git log --pretty=format:\"%C(cyan)%h%Creset -%C(red)%d%Creset %s - %C(yellow)[%an]%C(dim yellow) (%cr)\" --abbrev-commit -30
   graph = log --pretty='tformat: %s' --graph --all --find-renames
+  track = branch --set-upstream-to
   yesterday = log --since=yesterday.midnight
   # workflow
   cobra = !"f() { git fetch origin $(git main) --quiet; git checkout origin/$(git main) --quiet; git bra \"$@\";}; f"
@@ -84,7 +85,7 @@
   defaultBranch = main
 
 [branch]
-  autosetupmerge = always
+  autosetupmerge = simple
   autosetuprebase = always
   sort = -committerdate
 
@@ -101,7 +102,7 @@
   wordRegex = .
 
 [help]
-	autocorrect = 1
+  autocorrect = 1
 
 [log]
   abbrevCommit = true
@@ -125,7 +126,7 @@
 
 [push]
   autoSetupRemote = true
-  default = upstream
+  default = simple
   followTags = true
 
 [rebase]

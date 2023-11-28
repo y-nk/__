@@ -104,11 +104,10 @@ sdm watch youtube-dl oven-sh/bun/bun rodionovd/taps/shortcuts superfly/tap/flyct
 function apply_cask_apps() {
   section "cask apps"
 
-  casks=(1password 1password-cli android-platform-tools charles cron docker figma
+  casks=(1password 1password-cli android-platform-tools charles cron figma
 homebrew/cask-fonts/font-anonymous-pro
 homebrew/cask-fonts/font-martian-mono fork gpg-suite-no-mail gitify
-google-chrome iterm2 jumpshare keeweb lens maestral notion
-pock rectangle slack skype todoist visual-studio-code vlc vyprvpn zoom)
+google-chrome iterm2 maestral notion orbstack rectangle slack tableplus todoist unnaturalscrollwheels visual-studio-code vlc vyprvpn zoom)
 
   for cask in "${casks[@]}"; do
     install_stuff "$cask" "brew install --cask $cask"
