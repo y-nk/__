@@ -90,7 +90,7 @@
   sort = -committerdate
 
 [commit]
-  # gpgsign = true
+  gpgSign = true
   template = ~/.gitcommit
 
 [diff]
@@ -100,6 +100,9 @@
   submodule = log
   tool = vscode
   wordRegex = .
+
+[gpg]
+  program = gpg
 
 [help]
   autocorrect = 1

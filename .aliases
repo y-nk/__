@@ -49,7 +49,11 @@ function sober_up() {
   brew upgrade
 }
 
-function dr() {
+function find_in_files() {
+  grep -rn . -e $1
+}
+
+function dock_run() {
   docker run -it $1 /bin/sh
 }
 
