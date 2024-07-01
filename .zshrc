@@ -95,7 +95,7 @@ source ~/.secrets
 fortune
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-eval "$(fnm env --use-on-cd)"
+eval "$(~/.local/bin/mise activate zsh)"
 
 # pnpm
 export PNPM_HOME="/Users/julien/Library/pnpm"

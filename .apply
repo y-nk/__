@@ -92,9 +92,9 @@ function apply_brew() {
 function apply_cli_apps() {
   section "cli apps"
 
-  packages=(asciinema awscli bash bat chafa coreutils curl fd fortune fnm fzf gh git glow
-httpie jq keepassc kubectl m-cli mackup macos-trash mas ncdu nmap
-sdm watch youtube-dl oven-sh/bun/bun rodionovd/taps/shortcuts superfly/tap/flyctl)
+  packages=(asciinema awscli bash bat chafa coreutils curl fd fortune fzf gh git git-delta glow
+httpie jq kubectl m-cli mackup macos-trash mas mise ncdu nmap pnpm
+sdm telnet watch rodionovd/taps/shortcuts superfly/tap/flyctl)
 
   for package in "${packages[@]}"; do
     install_stuff "$package" "brew install $package"
@@ -104,10 +104,9 @@ sdm watch youtube-dl oven-sh/bun/bun rodionovd/taps/shortcuts superfly/tap/flyct
 function apply_cask_apps() {
   section "cask apps"
 
-  casks=(1password 1password-cli android-platform-tools charles cron figma
-homebrew/cask-fonts/font-anonymous-pro
-homebrew/cask-fonts/font-martian-mono fork gpg-suite-no-mail gitify
-google-chrome iterm2 maestral notion orbstack rectangle slack tableplus todoist unnaturalscrollwheels visual-studio-code vlc vyprvpn zoom)
+  casks=(1password 1password-cli android-platform-tools arc bambu-studio blender
+ fork gpg-suite-no-mail gitify iterm2 licecap maestral notion ngrok notion-calendar orbstack rectangle sdm shottr slack tableplus todoist unnaturalscrollwheels visual-studio-code vyprvpn homebrew/cask-fonts/font-anonymous-pro
+homebrew/cask-fonts/font-martian-mono)
 
   for cask in "${casks[@]}"; do
     install_stuff "$cask" "brew install --cask $cask"
@@ -147,7 +146,6 @@ function apply_postinstall() {
   apply_stuff "fzf" "$(brew --prefix)/opt/fzf/install --all"
   apply_stuff "mackup" "mackup restore"
   apply_stuff "shortcuts" "shortcuts import ~/.shortcuts.plist"
-  apply_stuff "volta" "volta install node"
 }
 
 function apply_macos() {
