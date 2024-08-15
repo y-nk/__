@@ -95,7 +95,7 @@ source ~/.secrets
 fortune
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-eval "$(~/.local/bin/mise activate zsh)"
+eval "$(mise activate zsh)"
 
 # pnpm
 export PNPM_HOME="/Users/julien/Library/pnpm"
