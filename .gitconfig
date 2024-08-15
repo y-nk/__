@@ -2,6 +2,7 @@
   attributesfile = ~/.gitattributes
   editor = /usr/bin/nano
   excludesfile = ~/.gitignore
+  hooksPath = /dev/null # https://stackoverflow.com/a/67527118
   trustctime = false # http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/
   untrackedCache = true # https://git-scm.com/docs/git-update-index#_untracked_cache
   whitespace = space-before-tab,-trailing-space
