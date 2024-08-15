@@ -1,0 +1,7 @@
+[tools]
+node = "20"
+
+[settings]
+experimental = true
+not_found_auto_install = true
+yes = true

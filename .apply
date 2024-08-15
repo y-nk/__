@@ -45,9 +45,11 @@ function apply_files() {
 }
 
 function apply_symlinks() {
+  mkdir -p "${HOME}/.config" > /dev/null
+
   section "symlinks"
  
-  links=(.aliases .apply .bash_profile .bashrc .colors .editorconfig .fdignore .gitcommit .gitconfig .y_nk.gitconfig .pro.gitconfig .gitignore .mackup.cfg .macos .shellrc .shortcuts.plist .zshrc)
+  links=(.aliases .apply .bash_profile .bashrc .colors .editorconfig .fdignore .gitcommit .gitconfig .y_nk.gitconfig .pro.gitconfig .gitignore .mackup.cfg .macos .shellrc .shortcuts.plist .zshrc .config/mise)
 
   for link in "${links[@]}"; do
     apply_stuff $link 'ln -fs "${__}/${link}" "${HOME}/${link}"'
