@@ -17,7 +17,7 @@
 
 [alias]
   # basic ops
-  bra = co -b
+  bra = !"f() { git co -b \"julien/$1\"; }; f"
   clo = clone
   cm  = commit
   co  = checkout
@@ -104,6 +104,7 @@
 
 [gpg]
   program = gpg
+  format = ssh
 
 [help]
   autocorrect = 1
@@ -143,3 +144,6 @@
 
 [tag]
   sort = version:refname
+
+[user]
+  signingkey = /Users/julien/.ssh/id_rsa

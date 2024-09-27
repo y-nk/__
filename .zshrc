@@ -100,4 +100,6 @@ eval "$(mise activate zsh)"
 # pnpm
 export PNPM_HOME="/Users/julien/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
-# pnpm end
+
+# cargo
+. "$HOME/.cargo/env"
