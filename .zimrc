@@ -1,0 +1,15 @@
+zmodule environment
+zmodule prompt-pwd
+zmodule utility
+zmodule git
+zmodule git-info
+zmodule duration-info
+zmodule input
+zmodule completion
+zmodule zsh-users/zsh-completions --fpath src
+zmodule zsh-users/zsh-syntax-highlighting
+zmodule zsh-users/zsh-history-substring-search
+zmodule zsh-users/zsh-autosuggestions
+zmodule danielporto/wd -s 'wd.plugin.zsh' -f '.'
+zmodule termtitle
+zmodule gitster

@@ -1,0 +1,131 @@
+{
+  "codesandbox.currentWorkspace": "9d0b3145-eb30-40f0-bccf-774ec80a3333",
+  "debug.allowBreakpointsEverywhere": true,
+  "diffEditor.codeLens": true,
+  "diffEditor.ignoreTrimWhitespace": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.cursorStyle": "block-outline",
+  "editor.fontFamily": "\"MartianMono-WdRg\", \"Anonymous Pro\", Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontSize": 13,
+  "editor.fontWeight": "200",
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "modificationsIfAvailable",
+  "editor.renderWhitespace": "all",
+  "editor.scrollBeyondLastLine": false,
+  "editor.stickyScroll.enabled": true,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 120,
+  "eslint.codeActionsOnSave.mode": "problems",
+  "eslint.lintTask.enable": true,
+  "eslint.run": "onSave",
+  "explorer.confirmDragAndDrop": false,
+  "explorer.incrementalNaming": "smart",
+  "extensions.ignoreRecommendations": true,
+  "extensions.supportUntrustedWorkspaces": {},
+  "files.autoSave": "off",
+  "files.enableTrash": false,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "git.allowForcePush": true,
+  "git.allowNoVerifyCommit": true,
+  "git.confirmSync": false,
+  "git.followTagsWhenSync": true,
+  "git.ignoreRebaseWarning": true,
+  "git.openRepositoryInParentFolders": "always",
+  "git.pruneOnFetch": true,
+  "git.rebaseWhenSync": true,
+  "git.replaceTagsWhenPull": true,
+  "git.suggestSmartCommit": false,
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+  "githubPullRequests.createOnPublishBranch": "never",
+  "githubPullRequests.pullBranch": "never",
+  "gitlens.defaultGravatarsStyle": "identicon",
+  "gitlens.hovers.currentLine.over": "line",
+  "gitlens.showWelcomeOnInstall": false,
+  "html.format.extraLiners": "",
+  "html.format.wrapLineLength": 80,
+  "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+  "javascript.referencesCodeLens.enabled": true,
+  "javascript.referencesCodeLens.showOnAllFunctions": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "liveshare.presence": true,
+  "prettier.arrowParens": "avoid",
+  "prettier.bracketSameLine": true,
+  "prettier.enable": false,
+  "prettier.printWidth": 100,
+  "prettier.requireConfig": true,
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "es5",
+  "redhat.telemetry.enabled": false,
+  "search.showLineNumbers": true,
+  "search.smartCase": true,
+  "security.workspace.trust.banner": "never",
+  "security.workspace.trust.enabled": false,
+  "telemetry.telemetryLevel": "off",
+  "todo-tree.general.statusBar": "total",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.format.insertSpaceAfterConstructor": true,
+  "typescript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
+  "typescript.preferences.preferTypeOnlyAutoImports": true,
+  "typescript.referencesCodeLens.enabled": true,
+  "typescript.referencesCodeLens.showOnAllFunctions": true,
+  "typescript.suggest.completeFunctionCalls": true,
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "typescript.tsserver.log": "off",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "vs-kubernetes": {
+    "vscode-kubernetes.minikube-path.mac": "/Users/julien/.vs-kubernetes/tools/minikube/darwin-amd64/minikube",
+    "vscode-kubernetes.helm-path.mac": "/Users/julien/.vs-kubernetes/tools/helm/darwin-amd64/helm"
+  },
+  "window.zoomLevel": 1,
+  "workbench.colorTheme": "Tokyo Night",
+  "workbench.startupEditor": "none",
+  "yaml.format.printWidth": 120,
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [
+      80
+    ],
+    "editor.selectionHighlight": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": "off"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+}

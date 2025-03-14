@@ -103,3 +103,7 @@ function load_secrets() {
 function clear_secrets() {
   echo -ne "_info 'no secrets loaded ' && _nl && _nl" > ~/.secrets
 }
+
+function prune_node_modules() {
+  find "${1:-.}" -name 'node_modules' -type d -prune -exec rm -rf '{}' +
+}

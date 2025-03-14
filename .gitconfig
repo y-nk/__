@@ -17,35 +17,40 @@
 
 [alias]
   # basic ops
-  bra = !"f() { git co -b \"julien/$1\"; }; f"
+  bra = !"f() { git switch --create \"julien/$1\"; }; f"
   clo = clone
   cm  = commit
   co  = checkout
   rc  = rebase --continue
   pushd = push -u origin HEAD
-  st  = status
+  st  = status -s -u
   sth = stash
   sync = !git pull --quiet && git push
   # pretty logs
-  eye = !git log --pretty=format:\"%C(cyan)%h%Creset -%C(red)%d%Creset %s - %C(yellow)[%an]%C(dim yellow) (%cr)\" --abbrev-commit -30
+  ls = !git log --pretty=format:\"%C(cyan)%h%Creset -%C(red)%d%Creset %s - %C(yellow)[%an]%C(dim yellow) (%cr)\" --abbrev-commit
   graph = log --pretty='tformat: %s' --graph --all --find-renames
   track = branch --set-upstream-to
   yesterday = log --since=yesterday.midnight
   # workflow
-  cobra = !"f() { git fetch origin $(git main) --quiet; git checkout origin/$(git main) --quiet; git bra \"$@\";}; f"
-  empty = !"git cm --allow-empty -m \"empty\" && git push"
+  test = !"f() { echo $@; }; f"
+
+  cobra = !"f() { git fetch origin $(git main) --quiet; git switch --create \"julien/$1\" origin/$(git main) --quiet; }; f"
+  empty = !git cm --allow-empty -m \"empty\" && git push
   feat = !"f() { git cm -m \"feat: $@\";}; f"
   fix = !"f() { git cm -m \"fix: $@\";}; f"
   it = !"f() { git add . && git cm -m \"$@\" && git push; }; f"
-  main = !"f() { git remote show origin | grep HEAD | awk '{print $NF}'; }; f"
+  main = !git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
   whoami = config user.email
   wip = !"f() { git add .; git cm -m \"wip: $(curl --silent http://metaphorpsum.com/sentences/1)\"; git push; }; f"
   # history related ops
-  pack = commit --amend --no-edit
+  amend = commit --amend --no-edit
   cancel = reset HEAD~1 --hard
   clear = reset --hard
-  fixup = !"f() { git commit --fixup \"$@\" && git rebase HEAD~10 --autosquash; }; f"
+  drop = !"f() { sha=$(git rev-parse \"$1\"); git rebase --onto \"$sha^\" \"$sha\"; }; f"
+  fixup = !"f() { git commit --fixup \"$1\" && git rebase --autosquash HEAD~10; }; f"
+  pop = !"f() { sha=$(git rev-parse \"$1\"); git rebase --onto \"$sha^\" \"$sha\"; git cherry-pick \"$sha\"; }; f"
   reword = commit --amend
+  stack = !git add . && git amend
   undo = reset HEAD~1 --mixed
   up = !"f() { git pull --rebase --autostash origin $(git main) \"$@\";}; f"
   rw = !"git add . && git cm --amend --no-edit && git push -f"

@@ -49,7 +49,7 @@ function apply_symlinks() {
 
   section "symlinks"
  
-  links=(.aliases .apply .bash_profile .bashrc .colors .editorconfig .fdignore .gitcommit .gitconfig .y_nk.gitconfig .pro.gitconfig .gitignore .mackup.cfg .macos .shellrc .shortcuts.plist .zshrc .config/mise)
+  links=( .aliases .apply .bash_profile .bashrc .colors .editorconfig .fdignore .gitcommit .gitconfig .y_nk.gitconfig .pro.gitconfig .gitignore .mackup.cfg .macos .shellrc .shortcuts.plist .zshrc .config/mise 'Library/Application Support/Code/User/keybindings.json' 'Library/Application Support/Code/User/settings.json' )
 
   for link in "${links[@]}"; do
     apply_stuff $link 'ln -fs "${__}/${link}" "${HOME}/${link}"'
@@ -71,13 +71,13 @@ function apply_xcode() {
   install_stuff "xcode" "sudo xcode-select --install"
 }
 
-function apply_omz() {
-  section "omz"
+function apply_zim() {
+  section "zim"
 
-  if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    install_stuff "omz" '/bin/bash -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
+  if [ ! -d "$__/.zim" ]; then
+    install_stuff "zim" 'curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh'
   else
-    update_stuff "omz" "omz update"
+    zimfw update
   fi
 }
 
@@ -160,7 +160,7 @@ function apply_all() {
   apply_files
   apply_symlinks
   apply_secrets
-  apply_omz
+  apply_zim
   apply_brew
   apply_cli_apps
   apply_cask_apps
